@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRoute.js";
 import authRouter from "./routes/authRoute.js";
+import listingRoute from './routes/listingRoute.js'
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 
@@ -26,17 +27,7 @@ app.use(cookieParser())
 app.use(cors())
 
 
-app.post("/api/auth/signup",async (req, res, next) => {
-  const { username, email, password } = req.body;
 
-  const newUser = new User({ username, email, password});
-  try {
-    await newUser.save();
-    res.status(201).json('User created successfully!');
-  } catch (error) {
-    next(error);
-  }
-} );
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -52,5 +43,6 @@ app.listen(process.env.PORT, () => {
 });
 
 
-app.use("api/user", userRouter);
-app.use("api/auth", authRouter);
+app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/listing", listingRoute);

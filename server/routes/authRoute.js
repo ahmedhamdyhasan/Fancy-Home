@@ -1,8 +1,20 @@
 import express from "express";
-import { signin, signup } from "../controllers/authController.js";
+import { signin, signup,google,signOut } from "../controllers/authController.js";
+// const router = express.Router();
+
+// router.post("/signup",signup);
+// router.post("/signin",signin);
+// router.post("/signin",google);
+// router.get('/signout', signOut)
+
+// export default router;
+
+
 const router = express.Router();
-// router.post("/signup", signup);
-router.post("/signup",signup);
-router.post("/signin",signin);
+
+router.post("/signup", signup);
+router.post("/signin", signin);
+router.post('/google', google);
+router.get('/signout', signOut)
 
 export default router;
